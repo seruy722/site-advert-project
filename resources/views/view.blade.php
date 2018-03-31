@@ -65,6 +65,17 @@
                             <input type="hidden" name="user_name" value="{{Auth::user()->name}}">
                             <button type="submit" class="btn btn-success">Добавить</button>
                         </form>
+                        <h3>Свяжитесь с автором объявления</h3>
+                        <form action="{{route('emails.contact-mail')}}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="description">Текст сообщения</label>
+                                <textarea name="message" class="form-control" id="description" cols="30" rows="10"></textarea>
+                            </div>
+                            <input type="hidden" name="advert_title" value="{{$advert->title}}">
+                            <input type="hidden" name="user_name" value="{{Auth::user()->name}}">
+                            <button type="submit" class="btn btn-success">Отправить</button>
+                        </form>
                         @endif
                         @endauth
    
