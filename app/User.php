@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Advert;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','surname','phone', 'email', 'password',  
+        'name','surname','phone', 'email', 'password','blocked'
     ];
 
     /**

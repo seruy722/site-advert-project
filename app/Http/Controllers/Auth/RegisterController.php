@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Advert\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\User;
+use Advert\Http\Controllers\Controller;
+use Advert\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 
@@ -27,7 +27,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
+    // protected function redirectTo()
+    // {
+    //     return view('accounts.user.home');
+    // }
 
     /**
      * Create a new controller instance.
@@ -56,19 +60,19 @@ class RegisterController extends Controller
         ], [
             'phone.unique' => 'Такой телефон уже существует',
             'phone.digits' => 'Телефон должен состоять из 10 цифр',
-            'name.required'=>'Поле Имя обязательное для заполнения',
-            'name.min'=>'Поле Имя должно содержать более 2 символов',
-            'name.max'=>'Поле Имя не может быть больше 255 символов',
-            'email.required'=>'Поле Email обязательное для заполнения',
-            'email.email'=>'Некорректный email адрес',
-            'email.max'=>'Поле Email не может быть больше 255 символов',
-            'email.unique'=>'Такой Email уже зарегестрирован',
-            'password.required'=>'Поле Password обязательное для заполнения',
-            'password.min'=>'Пароль должен составлять более 6 символов',
-            'password.confirmed'=>'Пароли не совпадают',
-            'surname.required'=>'Поле Фамилия обязательное для заполнения',
-            'surname.min'=>'Поле Фамилия должно содержать более 2 символов',
-            'surname.max'=>'Поле Фамилия не может быть больше 255 символов',
+            'name.required' => 'Поле Имя обязательное для заполнения',
+            'name.min' => 'Поле Имя должно содержать более 2 символов',
+            'name.max' => 'Поле Имя не может быть больше 255 символов',
+            'email.required' => 'Поле Email обязательное для заполнения',
+            'email.email' => 'Некорректный email адрес',
+            'email.max' => 'Поле Email не может быть больше 255 символов',
+            'email.unique' => 'Такой Email уже зарегестрирован',
+            'password.required' => 'Поле Password обязательное для заполнения',
+            'password.min' => 'Пароль должен составлять более 6 символов',
+            'password.confirmed' => 'Пароли не совпадают',
+            'surname.required' => 'Поле Фамилия обязательное для заполнения',
+            'surname.min' => 'Поле Фамилия должно содержать более 2 символов',
+            'surname.max' => 'Поле Фамилия не может быть больше 255 символов',
         ]);
     }
 
@@ -76,7 +80,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \Advert\User
      */
     protected function create(array $data)
     {
