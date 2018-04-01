@@ -86,10 +86,10 @@
                             <button type="submit" class="btn btn-primary">
                                Сохранить
                             </button>
-                            <a href="{{route('accounts.user.home',Auth::id())}}" class="btn btn-danger">Отменить</a>
                         </div>
                     </div>
                 </form>
+                {{-- <a href="{{route('accounts.admin.home',Auth::id())}}" class="btn btn-danger">Отменить</a> --}}
         </div>
     </div>
 </div>

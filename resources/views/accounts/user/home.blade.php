@@ -46,6 +46,7 @@
             <h3>Нет добавленных обьявлений!</h3>
             <a href="{{route('create')}}" class="btn btn-warning">+ СОЗДАТЬ ОБЬЯВЛЕНИЕ</a>
             @endif
+            <div class="paging">{{$adverts->links()}}</div>
         </div>
     </div>
 </div>

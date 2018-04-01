@@ -23,7 +23,7 @@
                     </tr>
                     @endforeach
                 </table>
-            
+                <div class="paging">{{$list->links()}}</div>
             @endisset
           
         </div>

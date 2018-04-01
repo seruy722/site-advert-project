@@ -12,15 +12,17 @@ class MailClass extends Mailable
 
     protected $name;
     protected $message;
+    protected $advertTitle;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $message)
+    public function __construct($advertTitle, $name, $message)
     {
         $this->name = $name;
         $this->message = $message;
+        $this->advertTitle = $advertTitle;
     }
 
     /**
@@ -32,7 +34,8 @@ class MailClass extends Mailable
     {
         return $this->view('emails.contact-mail')->with([
             'name' => $this->name,
-            'message' => $this->message,
-        ])->subject('Новое письмо');
+            'msg' => $this->message,
+            'advert_title' => $this->advertTitle,
+        ])->subject('Новое сообщение с сайта Advert.net');
     }
 }

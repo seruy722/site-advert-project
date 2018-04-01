@@ -17,7 +17,7 @@
                 @isset($rubrics)
                     <ul class="rubrics">
                         @foreach ($rubrics as $item)
-                                <li><i class="material-icons md-36">face</i><a href="{{route('index',$item)}}">{{$item}}</a></li>
+                                <li><i class="material-icons md-36">category</i><a href="{{route('index',$item)}}">{{$item}}</a></li>
                         @endforeach
                     </ul>
                 @endisset

@@ -130,6 +130,21 @@
     .view_img{
         width: 220px;
     }
+    .advert_info1{
+        display: flex;
+        justify-content: space-around;
+        font-size: 18px;
+        text-align: center;
+    }
+    .advert_info1>div{
+        width: 300px;
+        background-color: #0098D0;
+        height: 35px;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 5px;
+    }
     </style>
 </head>
 <body>

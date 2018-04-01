@@ -14,8 +14,7 @@
                                 @endif
                             @endauth   
                         </h3>
-                    <p>Телефон: {{$advert->phone}}</p>
-                    <p>{{$advert->price}} грн.</p>
+                        <div class="advert_info1"><div><i class="material-icons">call</i> Телефон: {{$advert->phone}}</div><div>{{$advert->price}} грн.</div></div>
                         <div>
                             <hr>
                             <div class="advert_info">
@@ -58,7 +57,7 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="description">Комментарий</label>
-                                <textarea name="comment" class="form-control" id="description" cols="30" rows="10"></textarea>
+                            <textarea name="comment" class="form-control" id="description" cols="30" rows="10">{{old('comment')}}</textarea>
                             </div>
                             <input type="hidden" name="advert_id" value="{{$advert->id}}">
                             <input type="hidden" name="user_id" value="{{Auth::id()}}">
@@ -70,10 +69,12 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="description">Текст сообщения</label>
-                                <textarea name="message" class="form-control" id="description" cols="30" rows="10"></textarea>
+                                <textarea name="message" class="form-control" id="description" cols="30" rows="10">{{old('message')}}</textarea>
                             </div>
                             <input type="hidden" name="advert_title" value="{{$advert->title}}">
                             <input type="hidden" name="user_name" value="{{Auth::user()->name}}">
+                            <input type="hidden" name="advert_id" value="{{$advert->id}}">
+                            <input type="hidden" name="user_id" value="{{$advert->user_id}}">
                             <button type="submit" class="btn btn-success">Отправить</button>
                         </form>
                         @endif

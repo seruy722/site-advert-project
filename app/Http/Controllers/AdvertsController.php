@@ -91,6 +91,10 @@ class AdvertsController extends Controller
     {
         $advert = Advert::where('id', $id)->first();
         foreach (explode(',', $advert->image_names) as $img) {
+            if ($img == 'nofoto.jpg') {
+                continue;
+            }
+
             unlink(public_path() . '/images/' . $img);
         }
         Advert::destroy($id);

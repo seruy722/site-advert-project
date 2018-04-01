@@ -45,6 +45,7 @@
             @else
             <h3>Нет добавленных обьявлений!</h3>
             @endif
+            <div class="paging">{{$adverts->links()}}</div>
         </div>
     </div>
 </div>

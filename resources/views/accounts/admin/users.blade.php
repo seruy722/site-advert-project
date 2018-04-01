@@ -25,9 +25,9 @@
                     </tr>
                     @endforeach
                 </table>
-            
+                <div class="paging">{{$users->links()}}</div>
             @endisset
-          
+            
         </div>
     </div>
 </div>

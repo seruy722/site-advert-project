@@ -21,7 +21,6 @@
                         @endforeach
                     </ul>
                 @endisset
-                
             </nav>
             <div class="sort">
                     <span>Сортировать по цене:</span>

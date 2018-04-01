@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function userHome($id)
     {
-        return view('accounts.user.home',['adverts' => Advert::where('user_id', $id)->get(),'comments'=>Comment::get()]);
+        return view('accounts.user.home',['adverts' => Advert::where('user_id', $id)->paginate(15),'comments'=>Comment::get()]);
     }
 
     public function settingsAccounts($id)
@@ -58,12 +58,12 @@ class HomeController extends Controller
 
     public function users()
     {
-        return view('accounts.admin.users',['users'=>User::where('role','user')->where('blocked',false)->get()]);
+        return view('accounts.admin.users',['users'=>User::where('role','user')->where('blocked',false)->paginate(15)]);
     }
 
     public function adminHome()
     {
-        return view('accounts.admin.home',['adverts' => Advert::where('active', false)->get(),'comments'=>Comment::get()]);
+        return view('accounts.admin.home',['adverts' => Advert::where('active', false)->paginate(15),'comments'=>Comment::get()]);
     }
 
     public function deleteUser($id)
@@ -95,7 +95,7 @@ class HomeController extends Controller
 
     public function blokedList()
     {
-        return view('accounts.admin.blockedList',['list'=>User::where('blocked',true)->get()]);
+        return view('accounts.admin.blockedList',['list'=>User::where('blocked',true)->paginate(15)]);
     }
 
     public function unBloked($id)
