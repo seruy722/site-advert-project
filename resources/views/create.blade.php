@@ -50,7 +50,7 @@
                     @endif
                 </div>
                 <label>Фотографии</label>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
+                {{-- <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
                     <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
                 </div>
                 <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
@@ -61,9 +61,9 @@
                 </div>
                 <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
                     <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
-                </div>
+                </div> --}}
                 <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1" multiple>
                     @if ($errors->has('image_names'))
                     <span class="help-block">
                         <strong>{{ $errors->first('image_names') }}</strong>

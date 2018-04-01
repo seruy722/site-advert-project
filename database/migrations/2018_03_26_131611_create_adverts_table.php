@@ -18,7 +18,7 @@ class CreateAdvertsTable extends Migration
             $table->string('title');
             $table->enum('rubric', ['Детский мир', 'Недвижимость', 'Транспорт', 'Запчасти для транспорта', 'Работа', 'Животные', 'Электроника', 'Бизнес и услуги', 'Мода и стиль', 'Хобби отдых и спорт']);
             $table->string('description');
-            $table->string('image_names')->nullable();
+            $table->string('image_names')->nullable()->default('nofoto.jpg');
             $table->string('region');
             $table->string('phone')->nullable();
             $table->integer('user_id')->unsigned()->nullable();

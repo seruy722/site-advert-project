@@ -31,7 +31,7 @@
             @foreach ($all as $item)
             <div class="row main_row">   
                 <div class="col-md-3 foto">
-                        <a href="{{route('view',$item->id)}}"><img src="{{$item->image_names=='nofoto.jpg'?asset('images/nofoto.jpg'):asset('images/'.substr($item->image_names,0,strpos($item->image_names,',')))}}" class="main_foto img-thumbnail" alt="mainFoto"></a>    
+                    <a href="{{route('view',$item->id)}}"><img src="{{$item->image_names=='nofoto.jpg'?asset('images/nofoto.jpg'):(count(explode(',',$item->image_names))>1)?asset('images/'.substr($item->image_names,0,strpos($item->image_names,','))):asset('images/'.$item->image_names)}}" class="main_foto img-thumbnail" alt="mainFoto"></a>    
                 </div>
                 <div class="col-md-7 middle_block">
                     <div>

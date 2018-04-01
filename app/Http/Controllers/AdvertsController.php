@@ -46,7 +46,7 @@ class AdvertsController extends Controller
         return view('accounts/admin/rubrics', ['rubrics' => explode(',', str_replace(['(', ')', 'enum', "'"], "", $rubrics)), 'adverts' => Advert::where('active', true)->get()]);
     }
 
-    public function create()
+    public function createAdvert()
     {
         $rubrics = (new Advert)->getEnum('rubric');
         return view('create', ['rubrics' => explode(',', str_replace(['(', ')', 'enum', "'"], "", $rubrics))]);
@@ -54,7 +54,7 @@ class AdvertsController extends Controller
 
     public function add(Request $request)
     {
-        // $this->validFields($request);
+        $this->validFields($request);
         $file = $this->saveUploadFile('image_names', $request);
         $arr = $request->except('_token');
         if ($file) {
@@ -91,10 +91,9 @@ class AdvertsController extends Controller
     {
         $advert = Advert::where('id', $id)->first();
         foreach (explode(',', $advert->image_names) as $img) {
-            if ($img == 'nofoto.jpg') {
+            if (!$img || $img == 'nofoto.jpg') {
                 continue;
             }
-
             unlink(public_path() . '/images/' . $img);
         }
         Advert::destroy($id);
@@ -136,23 +135,11 @@ class AdvertsController extends Controller
         $this->validate($req, [
             'title' => 'required|min:2|string|max:255',
             'rubric' => 'required',
-            'description' => 'required|min:20|max:1000',
-            'image_names' => 'image|size:5120',
-            'region' => 'required',
+            'description' => 'required|min:20|string|max:1000',
+            'image_names.*' => 'mimetypes:image/jpg,image/jpeg,image/png|dimensions:max:5120',
+            'region' => 'required|min:2|max:255',
+            'price'=>'numeric',
             'phone' => 'digits:10|unique:users,phone,' . $req->user_id,
-        ], [
-            'title.required' => 'Пожалуйста, укажите заголовок',
-            'title.min' => 'Заголовок не может быть короче 2 знаков',
-            'title.max' => 'Заголовок не может быть длиннее 255 знаков',
-            'rubric.required' => 'Пожалуйста, выбирите рубрику из списка',
-            'description.required' => 'Добавте описание обьявления',
-            'description.min' => 'Описание не может быть короче 20 знаков',
-            'description.max' => 'Описание не может быть длиннее 1000 знаков',
-            'image_names.image' => 'Один из файлов не является изображением',
-            'image_names.size' => 'Вы можете загрузить фотографий размером до 5 мб',
-            'region.required' => 'Введите название города или населенного пункта',
-            'phone.digits' => 'Телефон должен состоять из 10 цифр',
-            'phone.unique' => 'Пользователь с таким телефоном уже существует',
         ]);
     }
 

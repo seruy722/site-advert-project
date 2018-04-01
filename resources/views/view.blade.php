@@ -5,8 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-2 view_block">
             <div class="advert">
-                
-                        <div class="advert_image_view"><img src="{{$advert->image_names=='nofoto.jpg'?asset('images/nofoto.jpg'):asset('images/'.substr($advert->image_names,0,strpos($advert->image_names,',')))}}" alt="img"></div>
+                    <div class="advert_image_view"><img src="{{$advert->image_names=='nofoto.jpg'?asset('images/nofoto.jpg'):(count(explode(',',$advert->image_names))>1)?asset('images/'.substr($advert->image_names,0,strpos($advert->image_names,','))):asset('images/'.$advert->image_names)}}" alt="img"></div>
                         <h3>{{$advert->title}}
                             @auth
                                 @if (Auth::user()->role=='admin')
@@ -28,6 +27,9 @@
                         <div >
                                 @if ($arr = explode(',',$advert->image_names))
                                     @foreach ($arr as $item)
+                                    @if ($loop->first)
+                                        @continue
+                                    @endif
                                         <img src="{{asset('images/'.$item)}}" alt="img" class="view_img img-thumbnail">
                                     @endforeach
                                 @endif

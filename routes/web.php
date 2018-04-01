@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('update', 'AdvertsController@update')->name('update');
     Route::get('edit/{id}', 'AdvertsController@edit')->name('edit');
     Route::post('add', 'AdvertsController@add')->name('add');
-    Route::get('create', 'AdvertsController@create')->name('create');
+    Route::get('create', 'AdvertsController@createAdvert')->name('create');
     Route::post('send-mail', 'MailSetting@sendMessage')->name('emails.contact-mail');
 });
 
