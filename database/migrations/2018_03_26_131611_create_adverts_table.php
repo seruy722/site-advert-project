@@ -21,7 +21,8 @@ class CreateAdvertsTable extends Migration
             $table->string('image_names')->nullable()->default('nofoto.jpg');
             $table->string('region');
             $table->string('phone')->nullable();
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('price')->unsigned()->default(0);
             $table->boolean('active')->default(false);
             $table->timestamps();

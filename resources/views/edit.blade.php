@@ -21,7 +21,7 @@
                     <select class="form-control" name="rubric" required>
                         <option value="">Не выбрано</option>
                         @foreach ($rubrics as $item)
-                    <option value="{{ $item }}" {{$advert->rubric==$item?'selected':''}}>{{ $item }}</option>
+                        <option value="{{ $item }}" {{$advert->rubric==$item?'selected':''}}>{{ $item }}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('rubric'))
@@ -31,14 +31,14 @@
                     @endif
                 </div>
                 <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
-                        <label>Цена<span class="stars">*</span></label>
+                    <label>Цена<span class="stars">*</span></label>
                     <input type="text" name="price" class="form-control" id="exampleFormControlInput5" value="{{ $advert->price }}" required>
-                        @if ($errors->has('price'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('price') }}</strong>
-                        </span>
-                        @endif
-                    </div>
+                    @if ($errors->has('price'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('price') }}</strong>
+                    </span>
+                    @endif
+                </div>
                 <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="exampleFormControlTextarea1">Описание<span class="stars">*</span></label>
                     <textarea name="description" id="exampleFormControlTextarea1" class="form-control" cols="30" rows="10" required>{{ $advert->description }}</textarea>
@@ -50,19 +50,7 @@
                 </div>
                 <label>Фотографии</label>
                 <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1" value="{{old('image_names')}}">
-                </div>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1" multiple>
                     @if ($errors->has('image_names'))
                     <span class="help-block">
                         <strong>{{ $errors->first('image_names') }}</strong>

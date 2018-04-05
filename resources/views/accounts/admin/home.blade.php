@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('userControlMenu')
-    @include('layouts.userControlMenu')
+@include('layouts.userControlMenu')
 @endsection
 @section('content')
 <div class="container">
@@ -12,7 +12,6 @@
                     <th>Дата</th>
                     <th>Заголовок</th>
                     <th>Цена</th>
-                    <th>Комментарии</th>
                 </tr>
                 @foreach ($adverts as $item)
                 <tr>
@@ -23,21 +22,9 @@
                     @endif
                     <td>{{$item->title}}</td>
                     <td>{{$item->price}}грн.</td>
-                    <td>
-                        @isset($comments)
-                        @php $count = 0; @endphp
-                        @foreach ($comments as $elem)
-                            @if ($elem->advert_id == $item->id)
-                            @php $count++; @endphp
-                            @endif
-                        @endforeach
-                        @endisset
-                        {{$count}}
-                    </td>
                     <td> <a href="{{route('accounts.admin.activate',[$item->id,Auth::id()])}}" class="btn btn-warning">Активировать</a> </td>
-                <td><a href="{{route('view',$item->id)}}" class="btn btn-info">Посмотреть</a></td>
+                    <td><a href="{{route('view',$item->id)}}" class="btn btn-info">Посмотреть</a></td>
                     <td><a href="{{route('destroy',[$item->id,Auth::id(),Auth::user()->role])}}" class="btn btn-danger">Удалить</a></td>
-
                 </tr>
                 @endforeach
             </table>

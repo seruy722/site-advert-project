@@ -22,7 +22,7 @@
                     <select class="form-control" name="rubric" required>
                         <option value="">Не выбрано</option>
                         @foreach ($rubrics as $item)
-                    <option value="{{ $item }}" {{old('rubric')==$item?'selected':''}}>{{ $item }}</option>
+                        <option value="{{ $item }}" {{old('rubric')==$item?'selected':''}}>{{ $item }}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('rubric'))
@@ -32,14 +32,14 @@
                     @endif
                 </div>
                 <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
-                        <label>Цена<span class="stars">*</span></label>
+                    <label>Цена<span class="stars">*</span></label>
                     <input type="text" name="price" class="form-control" id="exampleFormControlInput5" value="{{ old('price') }}" required autofocus>
-                        @if ($errors->has('price'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('price') }}</strong>
-                        </span>
-                        @endif
-                    </div>
+                    @if ($errors->has('price'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('price') }}</strong>
+                    </span>
+                    @endif
+                </div>
                 <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="exampleFormControlTextarea1">Описание<span class="stars">*</span></label>
                     <textarea name="description" id="exampleFormControlTextarea1" class="form-control" cols="30" rows="10" required autofocus>{{ old('description') }}</textarea>
@@ -50,18 +50,6 @@
                     @endif
                 </div>
                 <label>Фотографии</label>
-                {{-- <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1" value="{{old('image_names')}}">
-                </div>
-                <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
-                    <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1">
-                </div> --}}
                 <div class="form-group {{ $errors->has('image_names') ? ' has-error' : '' }}">
                     <input type="file" name="image_names[]" class="form-control-file" id="exampleFormControlFile1" multiple>
                     @if ($errors->has('image_names'))
@@ -81,7 +69,7 @@
                 </div>
                 <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
                     <label for="exampleFormControlInput2">Номер телефона</label>
-                    <input type="text" name="phone" class="form-control" id="exampleFormControlInput2" value="{{old('phone')?old('phone'):Auth::user()->phone}}" required autofocus>
+                    <input type="text" name="phone" class="form-control" id="exampleFormControlInput2" value="{{old('phone')?old('phone'):Auth::user()->phone}}"  disabled>
                     @if ($errors->has('phone'))
                     <span class="help-block">
                         <strong>{{ $errors->first('phone') }}</strong>
@@ -101,7 +89,7 @@
                 <a href="{{route('index')}}" class="btn btn-danger">Отменить</a>
             </form>
             @else
-                <h4>Вы внесены в черный список</h4>
+            <h4>Вы внесены в черный список</h4>
             @endif
         </div>
     </div>

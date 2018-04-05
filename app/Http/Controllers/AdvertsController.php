@@ -66,7 +66,7 @@ class AdvertsController extends Controller
 
     public function view($id)
     {
-        return view('view', ['advert' => Advert::where('id', $id)->first(), 'comments' => Comment::where('advert_id', $id)->get()]);
+        return view('view', ['advert' => Advert::findOrFail($id), 'comments' => Comment::where('advert_id', $id)->get()]);
     }
 
     public function edit($id)
@@ -77,7 +77,7 @@ class AdvertsController extends Controller
 
     public function update(Request $request)
     {
-        $this->validFields($request);
+        $this->validFields($request, $request->id);
         $file = $this->saveUploadFile('image_names', $request);
         $arr = $request->except('_token');
         if ($file) {
@@ -96,8 +96,8 @@ class AdvertsController extends Controller
             }
             unlink(public_path() . '/images/' . $img);
         }
-        Advert::destroy($id);
         Comment::where('advert_id', $id)->delete();
+        Advert::destroy($id);
         if ($role == 'admin') {
             return redirect()->route('accounts.admin.home', $userId);
         } elseif ($role == 'user') {
@@ -127,19 +127,18 @@ class AdvertsController extends Controller
         } else {
             return false;
         }
-
     }
 
     public function validFields($req, $id = '')
     {
         $this->validate($req, [
-            'title' => 'required|min:2|string|max:255',
-            'rubric' => 'required',
+            'title' => 'required|min:2|string|max:255|unique:adverts,title,' . $id,
+            'rubric' => 'required|min:2|max:100',
             'description' => 'required|min:20|string|max:1000',
-            'image_names.*' => 'mimetypes:image/jpg,image/jpeg,image/png|dimensions:max:5120',
+            'image_names.*' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
             'region' => 'required|min:2|max:255',
-            'price'=>'numeric',
-            'phone' => 'digits:10|unique:users,phone,' . $req->user_id,
+            'price' => 'numeric',
+            'phone' => 'digits:10',
         ]);
     }
 

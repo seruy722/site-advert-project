@@ -1,8 +1,8 @@
 @extends('layouts.app')
-    @section('userControlMenu')
-    @include('layouts.userControlMenu')
-    @endsection
-    @section('content')
+@section('userControlMenu')
+@include('layouts.userControlMenu')
+@endsection
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -27,21 +27,19 @@
                         @isset($comments)
                         @php $count = 0; @endphp
                         @foreach ($comments as $elem)
-                            @if ($elem->advert_id == $item->id)
-                            @php $count++; @endphp
-                            @endif
+                        @if ($elem->advert_id == $item->id)
+                        @php $count++; @endphp
+                        @endif
                         @endforeach
                         @endisset
                         {{$count}}
                     </td>
                     <td> <a href="{{route('edit',$item->id)}}" class="btn btn-warning">Редактировать</a> </td>
-                <td><a href="{{route('view',$item->id)}}" class="btn btn-info">Посмотреть</a></td>
+                    <td><a href="{{route('view',$item->id)}}" class="btn btn-info">Посмотреть</a></td>
                     <td><a href="{{route('destroy',[$item->id,Auth::id(),Auth::user()->role])}}" class="btn btn-danger">Удалить</a></td>
-
                 </tr>
                 @endforeach
             </table>
-
             @else
             <h3>Нет добавленных обьявлений!</h3>
             <a href="{{route('create')}}" class="btn btn-warning">+ СОЗДАТЬ ОБЬЯВЛЕНИЕ</a>

@@ -12,7 +12,7 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        Comment::truncate();
+        // Comment::truncate();
         $faker = \Faker\Factory::create();
         for ($i = 0; $i < 100; $i++) {
             Comment::create([

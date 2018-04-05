@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
+        // User::truncate();
         $active = [true, false];
         $faker = \Faker\Factory::create();
         for ($i = 0; $i < 20; $i++) {
