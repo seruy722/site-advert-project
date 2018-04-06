@@ -3,8 +3,8 @@
 namespace Advert\Http\Controllers;
 
 use Advert\Comment;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
@@ -16,8 +16,9 @@ class CommentsController extends Controller
         return redirect()->route('view', $request->advert_id);
     }
 
-    public function destroy($id,$advert_id)
+    public function destroy($id)
     {
+        $advert_id = (Comment::find($id)->advert->toArray()['id']);
         Comment::destroy($id);
         return redirect()->route('view', $advert_id);
     }

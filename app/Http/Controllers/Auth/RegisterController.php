@@ -28,10 +28,6 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
-    // protected function redirectTo()
-    // {
-    //     return view('accounts.user.home');
-    // }
 
     /**
      * Create a new controller instance.
@@ -54,25 +50,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|min:2|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|max:255|confirmed',
             'surname' => 'required|min:2|string|max:255',
             'phone' => 'digits:10|unique:users',
-        ], [
-            'phone.unique' => 'Такой телефон уже существует',
-            'phone.digits' => 'Телефон должен состоять из 10 цифр',
-            'name.required' => 'Поле Имя обязательное для заполнения',
-            'name.min' => 'Поле Имя должно содержать более 2 символов',
-            'name.max' => 'Поле Имя не может быть больше 255 символов',
-            'email.required' => 'Поле Email обязательное для заполнения',
-            'email.email' => 'Некорректный email адрес',
-            'email.max' => 'Поле Email не может быть больше 255 символов',
-            'email.unique' => 'Такой Email уже зарегестрирован',
-            'password.required' => 'Поле Password обязательное для заполнения',
-            'password.min' => 'Пароль должен составлять более 6 символов',
-            'password.confirmed' => 'Пароли не совпадают',
-            'surname.required' => 'Поле Фамилия обязательное для заполнения',
-            'surname.min' => 'Поле Фамилия должно содержать более 2 символов',
-            'surname.max' => 'Поле Фамилия не может быть больше 255 символов',
         ]);
     }
 

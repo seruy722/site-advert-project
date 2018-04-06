@@ -28,12 +28,12 @@ class HomeController extends Controller
      */
     public function userHome($id)
     {
-        return view('accounts.user.home', ['adverts' => Advert::where('user_id', $id)->paginate(15), 'comments' => Comment::get()]);
+        return view('accounts.user.home', ['adverts' => Advert::findOrFail($id)->paginate(15), 'comments' => Comment::get()]);
     }
 
     public function settingsAccounts($id)
     {
-        return view('accounts.user.settings', ['user' => User::find($id)]);
+        return view('accounts.user.settings', ['user' => User::findOrFail($id)]);
     }
 
     public function updateAccounts(Request $request)
@@ -55,12 +55,12 @@ class HomeController extends Controller
 
     }
 
-    public function edit($id, $userId)
+    public function editUsers($id, $userId)
     {
-        return view('accounts.admin.edit', ['user' => User::where('id', $id)->first()]);
+        return view('accounts.admin.edit', ['user' => User::findOrFail($id)]);
     }
 
-    public function users()
+    public function getUsersForAdmin()
     {
         return view('accounts.admin.users', ['users' => User::where('role', 'user')->where('blocked', false)->orderBy('id', 'desc')->paginate(15)]);
     }
@@ -72,7 +72,9 @@ class HomeController extends Controller
 
     public function deleteUser($id)
     {
-        User::where('id', $id)->delete();
+        Comment::where('user_id', $id)->delete();
+        Advert::where('user_id', $id)->delete();
+        User::destroy($id);
         return redirect()->route('accounts.admin.users');
     }
     public function createUser(Request $request)
@@ -92,18 +94,18 @@ class HomeController extends Controller
         }
     }
 
-    public function blocked($id)
+    public function blockedUser($id)
     {
         User::where('id', $id)->update(['blocked' => true]);
         return redirect()->route('accounts.admin.users');
     }
 
-    public function blokedList()
+    public function blokedListUsers()
     {
         return view('accounts.admin.blockedList', ['list' => User::where('blocked', true)->paginate(15)]);
     }
 
-    public function unBloked($id)
+    public function unBlokedUser($id)
     {
         User::where('id', $id)->update(['blocked' => false]);
         return redirect()->route('accounts.admin.blokedList');

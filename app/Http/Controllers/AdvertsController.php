@@ -52,7 +52,7 @@ class AdvertsController extends Controller
         return view('create', ['rubrics' => explode(',', str_replace(['(', ')', 'enum', "'"], "", $rubrics))]);
     }
 
-    public function add(Request $request)
+    public function addAdvert(Request $request)
     {
         $this->validFields($request);
         $file = $this->saveUploadFile('image_names', $request);
@@ -64,18 +64,18 @@ class AdvertsController extends Controller
         return redirect()->route('accounts.user.home', $request->user_id);
     }
 
-    public function view($id)
+    public function viewAdvert($id)
     {
-        return view('view', ['advert' => Advert::findOrFail($id), 'comments' => Comment::where('advert_id', $id)->get()]);
+        return view('view', ['advert' => Advert::findOrFail($id), 'comments' => json_decode(Advert::find($id)->comments->toJson())]);
     }
 
-    public function edit($id)
+    public function editAdvert($id)
     {
         $rubrics = (new Advert)->getEnum('rubric');
-        return view('edit', ['advert' => Advert::where('id', $id)->first(), 'rubrics' => explode(',', str_replace(['(', ')', 'enum', "'"], "", $rubrics))]);
+        return view('edit', ['advert' => Advert::findOrFail($id), 'rubrics' => explode(',', str_replace(['(', ')', 'enum', "'"], "", $rubrics))]);
     }
 
-    public function update(Request $request)
+    public function updateAdvert(Request $request)
     {
         $this->validFields($request, $request->id);
         $file = $this->saveUploadFile('image_names', $request);
@@ -87,9 +87,9 @@ class AdvertsController extends Controller
         return redirect()->route('accounts.user.home', $request->user_id);
     }
 
-    public function destroy($id, $userId, $role = null)
+    public function destroyAdvert($id, $userId, $role = null)
     {
-        $advert = Advert::where('id', $id)->first();
+        $advert = Advert::findOrFail($id);
         foreach (explode(',', $advert->image_names) as $img) {
             if (!$img || $img == 'nofoto.jpg') {
                 continue;
@@ -106,9 +106,9 @@ class AdvertsController extends Controller
         return redirect()->route('index');
     }
 
-    public function activate($id, $userId)
+    public function activateAdvert($id, $userId)
     {
-        Advert::where('id', $id)->update(['active' => true]);
+        Advert::findOrFail($id)->update(['active' => true]);
         return redirect()->route('accounts.admin.home', $userId);
     }
 

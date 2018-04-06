@@ -42,7 +42,7 @@
                         <span class="comment_date">{{date('d M Y',strtotime($advert->updated_at))}}</span>
                         @auth
                         @if (Auth::user()->role=='admin' || Auth::id()==$advert->user_id)
-                        <a href="{{route('comment.destroy',['id'=>$item->id,'advert_id'=>$advert->id])}}" class="btn btn-danger">Удалить отзыв</a>
+                        <a href="{{route('comment.destroy',$item->id)}}" class="btn btn-danger">Удалить отзыв</a>
                         @endif
                         @endauth
                     </h4>

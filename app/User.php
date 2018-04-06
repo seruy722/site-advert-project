@@ -11,11 +11,11 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *  
+     *
      * @var array
      */
     protected $fillable = [
-        'name','surname','phone', 'email', 'password','blocked'
+        'name', 'surname', 'phone', 'email', 'password', 'blocked',
     ];
 
     /**
@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function comments(){
+        return $this->hasMany(\Advert\Comment::class);
+     }
 }
